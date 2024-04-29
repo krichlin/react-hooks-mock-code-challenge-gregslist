@@ -14,6 +14,9 @@ function ListingsContainer( ) {
     })
 }, [])
   
+  function removeListing(listingId) {
+    console.log('remove listing')
+  }
 
   const listingCards = listings.map((listing) => (
     <ListingCard key={listing.id} description={listing.description} image={listing.image} location={listing.location} />

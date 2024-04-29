@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-function ListingCard(listing) {
+function ListingCard(listing, removeListing) {
 
   const [fav, setFav] = useState(false)
 
@@ -10,6 +10,22 @@ function ListingCard(listing) {
     console.log('clicked')
     // setFav(!fav)
     setFav((currentFavoritedState) => !currentFavoritedState )
+  }
+
+  function handleDeleteClick() {
+    console.log('delete clicked')
+    fetch(`http://localhost:6001/listings/${id}`, {
+      method: 'DELETE'
+    })
+    .then((resp) => {
+      console.log(resp)
+      if (resp.ok) {
+        // filter and update state of listings to remove from the dom.
+      }
+      else {
+        console.log('handle error')
+      }
+    })
   }
 
   return (
@@ -26,7 +42,7 @@ function ListingCard(listing) {
         )}
         <strong>{description}</strong>
         <span> · {location}</span>
-        <button className="emoji-button delete">🗑</button>
+        <button onClick={handleDeleteClick} className="emoji-button delete">🗑</button>
       </div>
     </li>
   );
